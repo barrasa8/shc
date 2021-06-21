@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { useState } from 'react';
 import { ethers } from 'ethers';
+// import { useMoralis } from "react-moralis";
 import './App.css';
 import Greeter from './artifacts/contracts/Greeter.sol/Greeter.json';
 
@@ -28,7 +29,7 @@ function App() {
       } catch (err) {
         console.log("Error: ", err)
       }
-    }    
+    }
   }
 
   // call the smart contract, send an update
@@ -44,25 +45,15 @@ function App() {
       fetchGreeting()
     }
   }
-  
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-      <button onClick={fetchGreeting}>Fetch Greeting</button>
+        <button onClick={fetchGreeting}>Fetch Greeting</button>
         <button onClick={setGreeting}>Set Greeting</button>
         <input onChange={e => setGreetingValue(e.target.value)} placeholder="Set greeting" />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. ok? or not ?
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
