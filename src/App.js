@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-// import { useMoralis } from "react-moralis";
+import { useMoralis } from "react-moralis";
+import { Button } from "react-bootstrap";
 import "./App.css";
 import Greeter from "./artifacts/contracts/Greeter.sol/Greeter.json";
 
@@ -10,6 +11,9 @@ const greeterAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
 function App() {
   // store greeting in local state
   const [greeting, setGreetingValue] = useState("");
+
+  //Authenticate with Moralis
+  const { authenticate, isAuthenticated, logout } = useMoralis();
 
   // request access to the user's MetaMask account
   async function requestAccount() {
@@ -50,14 +54,22 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <button onClick={fetchGreeting}>Fetch Greeting</button>
-        <button onClick={setGreeting}>Set Greeting</button>
-        <input
-          onChange={(e) => setGreetingValue(e.target.value)}
-          placeholder="Set greeting"
-        />
-      </header>
+      {isAuthenticated ? (
+        <div>
+          <h1>Welcome to the App</h1>
+          <Button onClick={() => logout()}>Logout</Button>
+        </div>
+      ) : (
+        <header className="App-header">
+          <button onClick={fetchGreeting}>Fetch Greeting</button>
+          <button onClick={setGreeting}>Set Greeting</button>
+          <input
+            onChange={(e) => setGreetingValue(e.target.value)}
+            placeholder="Set greeting"
+          />
+          <Button onClick={() => authenticate()}>Authenticate</Button>
+        </header>
+      )}
     </div>
   );
 }
