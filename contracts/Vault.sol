@@ -17,7 +17,8 @@ interface IIEther {
 
 contract Vault is ReentrancyGuard, Ownable {
     //variables
-    mapping (address => uint256) internal _userToShares;
+    uint256 public balance;
+    mapping (address => uint256) internal _userShares;
 
     constructor() Ownable() ReentrancyGuard() {}
 
@@ -34,13 +35,34 @@ contract Vault is ReentrancyGuard, Ownable {
     // Finance functions
     //###############
 
-    function deposit(uint256 amount) external {
-        _userToShares[msg.sender] =  amount;
+    function deposit(uint256 amount) external payable {
+        _userShares[msg.sender] =  amount;
+        balance += msg.value;
     }
 
-    function balanceOf ()  external view returns(uint256)
+    function balanceOfuser ()  external view returns(uint256)
     {
-        return _userToShares[msg.sender];
+        return _userShares[msg.sender];
     }
+
+    function YearnInvest () external  payable onlyOwner{
+        require(msg.value>0,"Vault is empty");
+        IEther.invest();
+        balance=0;
+    }
+
+    function  YearnRedeem() external payable {
+        uint256 _shares = IEther.calcPoolValueInETH();
+        IEther.redeem(_shares);
+    }
+
+    function withdraw(uint256 amount) external payable {
+        uint256 shares =  _userShares[msg.sender];
+        require(_userShares[msg.sender]>0,"No funds available");
+        // require(hasMetGoal == true(),"Goal not met");
+        require(amount <= shares,"Amount greater than user shares");
+
+        balance += amount;
+    } 
 
 } 
