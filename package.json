@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "5.0.1",
     "chainlink": "^0.6.1",
+    "dotenv": "^10.0.0",
     "moralis": "^0.0.25",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",

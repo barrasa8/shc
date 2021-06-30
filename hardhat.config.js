@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -21,9 +22,13 @@ module.exports = {
   paths: {
     artifacts: './src/artifacts',
   },
+  defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      chainId: 1337
+      forking: {
+        url: process.env.ALCHEMY_MAINNET_RPC_URL 
+      }
+      // chainId: 1337
     }
   }
 };

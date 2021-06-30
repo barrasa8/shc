@@ -56,6 +56,7 @@ contract Vault is ReentrancyGuard, Ownable {
         IEther.redeem(_shares);
     }
 
+    //User can withdraw the funds to their wallet
     function withdraw(uint256 amount) external payable {
         uint256 shares =  _userShares[msg.sender];
         require(_userShares[msg.sender]>0,"No funds available");
