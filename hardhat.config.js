@@ -26,7 +26,8 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: process.env.ALCHEMY_MAINNET_RPC_URL 
+        url: process.env.ALCHEMY_MAINNET_RPC_URL,
+        blockNumber: 11095000
       }
       // chainId: 1337
     }
