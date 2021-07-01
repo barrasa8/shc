@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import "./App.css";
 import Greeter from "./artifacts/contracts/Greeter.sol/Greeter.json";
 
